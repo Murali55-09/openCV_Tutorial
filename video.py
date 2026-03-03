@@ -24,6 +24,29 @@ def readVideo():
     cap.release()              # release the video capture object
     cv.destroyAllWindows()     # close all OpenCV windows
 
+def readVideoFile():
+    videoPath = os.path.join("data", 'video.mp4')  # path to the video file
+    cap = cv.VideoCapture(videoPath)  # capture video from the specified file
+
+    if not cap.isOpened():
+        print("Error: Could not open video.")
+        exit()
+
+    while True:
+        ret, frame = cap.read()   # read a frame from the video
+
+        if not ret:
+            print("End of video reached.")
+            break
+
+        cv.imshow('Video', frame)  # display the frame in a window
+
+        if cv.waitKey(25) & 0xFF == ord('q'):  # wait for 'q' key to exit
+            break
+
+    cap.release()              # release the video capture object
+    cv.destroyAllWindows()     # close all OpenCV windows
 
 if __name__ == "__main__":
-    readVideo()
+    #readVideo()
+    readVideoFile()
